@@ -5,34 +5,28 @@ var options = require("../AppConfig.json");
 
 tool.initialize(options.app_key, options.rest_key);
 
-//function local() {
-////调用hello.js云端代码
-//    var hello = require("../cloud/hello.js").hello;
-//    tool.test(hello);
-//
-////调用first.js云端代码（带上传参数）
-//    var first = require("../cloud/first.js").first;
-//    tool.test(first, {"name": "Bmob后端云"});
-//
-////调用second.js云端代码
-//    var second = require("../cloud/second.js").second;
-//    tool.test(second);
-//
-////调用third.js云端代码（带上传参数）
-//    var third = require("../cloud/third.js").third;
-//    tool.test(third, {"userid": "y6qBDvXj"});
-//}
+function local() {
+//调用hello.js云端代码
+    var hello = require("../cloud/hello.js").hello;
+    tool.test(hello);
 
-function server() {
-    var path = require("https://api.bmob.cn/1/classes");
 //调用first.js云端代码（带上传参数）
-    tool.testInServer(path.resolve(__dirname, "../cloud/first.js"), {"name": "Bmob后端云"});
+    var first = require("../cloud/first.js").first;
+    tool.test(first, {"name": "Bmob后端云"});
 
 //调用second.js云端代码
-    tool.testInServer(path.resolve(__dirname, "../cloud/second.js"));
+    var second = require("../cloud/second.js").second;
+    tool.test(second);
 
 //调用third.js云端代码（带上传参数）
-    tool.testInServer(path.resolve(__dirname, "../cloud/third.js"), {"userid": "y6qBDvXj"});
+    var third = require("../cloud/third.js").third;
+    tool.test(third, {"userid": "y6qBDvXj"});
+}
+
+function server() {
+    var path = require("path");
+//创建column列名
+    tool.testInServer(path.resolve(__dirname, "../cloud/MakeAuthColumn.js"));
 }
 
 function relation() {
@@ -46,36 +40,7 @@ function bug2() {
 }
 
 //local();
-//server();
+server();
 //relation();
 //bug2();
 
-function testUserSignUp(){
-    var userSignUp = require("../cloud/userSignUp.js").userSignUp;
-    tool.testInServer(userSignUp);
-}
-
-//testUserSignUp();
-
-function testUserLogin(){
-    var testLogin = require("../cloud/testLogin.js").testLogin;
-    tool.test(testLogin);
-}
-
-//testUserLogin();
-
-function testUpdateUserByObjectId(){
-    var testUpdateUserByObjectId = require("../cloud/testUpdateUserByObjectId.js").testUpdateUserByObjectId;
-    tool.test(testUpdateUserByObjectId);
-}
-
-//testUpdateUserByObjectId();
-
-function testRemoveUserByObjectId(){
-    var testRemoveUserByObjectId = require("../cloud/testRemoveUserByObjectId.js").testRemoveUserByObjectId;
-    tool.test(testRemoveUserByObjectId);
-}
-
-//testRemoveUserByObjectId();
-testUserSignUp();
-testUserLogin();
