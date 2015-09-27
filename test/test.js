@@ -27,6 +27,11 @@ function server() {
     var path = require("path");
 //创建column列名
     tool.testInServer(path.resolve(__dirname, "../cloud/MakeAuthColumn.js"));
+//获取授权数据
+    tool.testInServer(path.resolve(__dirname, "../cloud/GetAuthInfo.js"));
+////myDate
+//    tool.testInServer(path.resolve(__dirname, "../cloud/MyDate.js"));
+
 }
 
 function relation() {
@@ -40,7 +45,16 @@ function bug2() {
 }
 
 //local();
-server();
-//relation();
-//bug2();
+//server();
+
+function getAuthInfo(data){
+    var getAuthInfo = require("../cloud/GetAuthInfo.js").getAuthInfo;
+    tool.test(getAuthInfo,data);
+}
+//function makeAuthColumns(){
+//    var getAuthInfo = require("../cloud/MakeAuthColumn.js").MakeAuthColumns;
+//    tool.test(getAuthInfo);
+//}
+//
+getAuthInfo({"openid":"c72f0ce72ce6e3cd"});
 
